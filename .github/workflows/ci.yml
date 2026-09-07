@@ -43,7 +43,5 @@ jobs:
       - name: Secret scan (regex)
         run: python scripts/scan_secrets.py
 
-      - name: Secret scan (detect-secrets, working tree)
-        run: |
-          detect-secrets scan --baseline .secrets.baseline
-          git diff --exit-code .secrets.baseline
+      - name: Secret scan (detect-secrets against the audited baseline)
+        run: git ls-files -z | xargs -0 detect-secrets-hook --baseline .secrets.baseline
