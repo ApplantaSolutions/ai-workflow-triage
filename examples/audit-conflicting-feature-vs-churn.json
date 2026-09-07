@@ -1,0 +1,324 @@
+{
+  "audit_persisted": true,
+  "audit_record": {
+    "audit_id": "example-conflicting-feature-vs-churn",
+    "channel": null,
+    "decision_confidence": 0.7,
+    "escalation": "NONE",
+    "final_disposition": "HUMAN_REVIEW",
+    "final_route": "HUMAN_REVIEW",
+    "final_urgency": "HIGH",
+    "harness_version": "1.0.0",
+    "human_review": true,
+    "human_review_reason": "conflicting signals \u2014 feature request combined with a churn / cancellation signal",
+    "input_text": "Small feature idea \u2014 it'd be nice if the calendar view remembered my last filter. On a completely separate note: if the SSO bug from last week isn't fixed by Friday we are cancelling our contract and moving to a competitor. Just so you know.",
+    "interpretation": {
+      "category": "FEATURE_REQUEST",
+      "customer_intent": "request a calendar filter memory; also threatens cancellation over an SSO bug",
+      "entities": {},
+      "missing_information": [],
+      "model_confidence": 0.55,
+      "reasoning_summary": "One message mixes a low-priority feature idea with a cancellation threat tied to a deadline.",
+      "risk_signals": [
+        "MENTIONS_CHURN",
+        "DEADLINE_MENTIONED"
+      ],
+      "summary": "Customer requests a calendar filter-memory feature and separately threatens to cancel the contract and switch competitors if an SSO bug is not fixed by Friday.",
+      "urgency": "HIGH"
+    },
+    "keyword_signals": {
+      "billing_language": false,
+      "churn_language": true,
+      "data_loss_language": false,
+      "deadline_language": true,
+      "injection_language": false,
+      "legal_language": false,
+      "matched": {
+        "churn_language": [
+          "cancelling our contract",
+          "we are cancelling",
+          "moving to a competitor"
+        ],
+        "deadline_language": [
+          "by Friday"
+        ]
+      },
+      "notes": [],
+      "outage_language": false,
+      "security_language": false
+    },
+    "missing_information": [],
+    "processing_errors": [],
+    "provider_attempts": 1,
+    "provider_model": null,
+    "provider_name": "mock",
+    "reasons": [
+      {
+        "rule_id": "R08_FEATURE",
+        "source": "DETERMINISTIC",
+        "text": "classified as a feature request; routed to PRODUCT at low urgency"
+      },
+      {
+        "rule_id": "R11_CONFLICTING_SIGNALS",
+        "source": "DETERMINISTIC",
+        "text": "conflicting signals (feature request combined with a churn / cancellation signal); sent to a human to disambiguate"
+      },
+      {
+        "rule_id": "R13_ANGRY_OR_CHURN",
+        "source": "DETERMINISTIC",
+        "text": "angry tone or a churn / cancellation signal; urgency raised to at least HIGH (no automatic escalation)"
+      },
+      {
+        "rule_id": "R14_DEADLINE",
+        "source": "DETERMINISTIC",
+        "text": "a deadline was mentioned; urgency raised to at least HIGH"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "One message mixes a low-priority feature idea with a cancellation threat tied to a deadline."
+      }
+    ],
+    "received_at": "2026-01-02T03:04:05+00:00",
+    "request_id": "example-conflicting-feature-vs-churn",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R04_OUTAGE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R05_BILLING"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R06_BUG_WITH_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R07_BUG_NO_REPRO"
+      },
+      {
+        "applied": true,
+        "effect": "route=PRODUCT, wants_low_urgency, disposition=ROUTED",
+        "explanation": "feature request",
+        "rule_id": "R08_FEATURE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R09_MISSING_ACCOUNT_ID"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R10_LOW_MODEL_CONFIDENCE"
+      },
+      {
+        "applied": true,
+        "effect": "human_review, disposition=HUMAN_REVIEW",
+        "explanation": "conflicting signals: feature request combined with a churn / cancellation signal",
+        "rule_id": "R11_CONFLICTING_SIGNALS"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R12_UNKNOWN_CATEGORY"
+      },
+      {
+        "applied": true,
+        "effect": "urgency_floor=HIGH",
+        "explanation": "angry tone or a churn / cancellation signal",
+        "rule_id": "R13_ANGRY_OR_CHURN"
+      },
+      {
+        "applied": true,
+        "effect": "urgency_floor=HIGH",
+        "explanation": "a deadline was mentioned",
+        "rule_id": "R14_DEADLINE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "a route was already set, or a terminal rule fired",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R08_FEATURE",
+      "R11_CONFLICTING_SIGNALS",
+      "R13_ANGRY_OR_CHURN",
+      "R14_DEADLINE"
+    ],
+    "schema_version": 1,
+    "suggested_route": "PRODUCT",
+    "validation_error": null,
+    "validation_status": "OK"
+  },
+  "decision": {
+    "decision_confidence": 0.7,
+    "disposition": "HUMAN_REVIEW",
+    "escalation": "NONE",
+    "human_review": true,
+    "human_review_reason": "conflicting signals \u2014 feature request combined with a churn / cancellation signal",
+    "missing_information": [],
+    "reasons": [
+      {
+        "rule_id": "R08_FEATURE",
+        "source": "DETERMINISTIC",
+        "text": "classified as a feature request; routed to PRODUCT at low urgency"
+      },
+      {
+        "rule_id": "R11_CONFLICTING_SIGNALS",
+        "source": "DETERMINISTIC",
+        "text": "conflicting signals (feature request combined with a churn / cancellation signal); sent to a human to disambiguate"
+      },
+      {
+        "rule_id": "R13_ANGRY_OR_CHURN",
+        "source": "DETERMINISTIC",
+        "text": "angry tone or a churn / cancellation signal; urgency raised to at least HIGH (no automatic escalation)"
+      },
+      {
+        "rule_id": "R14_DEADLINE",
+        "source": "DETERMINISTIC",
+        "text": "a deadline was mentioned; urgency raised to at least HIGH"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "One message mixes a low-priority feature idea with a cancellation threat tied to a deadline."
+      }
+    ],
+    "route": "HUMAN_REVIEW",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R04_OUTAGE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R05_BILLING"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R06_BUG_WITH_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R07_BUG_NO_REPRO"
+      },
+      {
+        "applied": true,
+        "effect": "route=PRODUCT, wants_low_urgency, disposition=ROUTED",
+        "explanation": "feature request",
+        "rule_id": "R08_FEATURE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R09_MISSING_ACCOUNT_ID"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R10_LOW_MODEL_CONFIDENCE"
+      },
+      {
+        "applied": true,
+        "effect": "human_review, disposition=HUMAN_REVIEW",
+        "explanation": "conflicting signals: feature request combined with a churn / cancellation signal",
+        "rule_id": "R11_CONFLICTING_SIGNALS"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R12_UNKNOWN_CATEGORY"
+      },
+      {
+        "applied": true,
+        "effect": "urgency_floor=HIGH",
+        "explanation": "angry tone or a churn / cancellation signal",
+        "rule_id": "R13_ANGRY_OR_CHURN"
+      },
+      {
+        "applied": true,
+        "effect": "urgency_floor=HIGH",
+        "explanation": "a deadline was mentioned",
+        "rule_id": "R14_DEADLINE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "a route was already set, or a terminal rule fired",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R08_FEATURE",
+      "R11_CONFLICTING_SIGNALS",
+      "R13_ANGRY_OR_CHURN",
+      "R14_DEADLINE"
+    ],
+    "suggested_route": "PRODUCT",
+    "urgency": "HIGH"
+  },
+  "scenario_id": "conflicting-feature-vs-churn"
+}

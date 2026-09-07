@@ -1,0 +1,144 @@
+{
+  "audit_persisted": true,
+  "audit_record": {
+    "audit_id": "example-security-suspicious-login",
+    "channel": null,
+    "decision_confidence": 0.95,
+    "escalation": "CRITICAL",
+    "final_disposition": "ROUTED",
+    "final_route": "SECURITY",
+    "final_urgency": "CRITICAL",
+    "harness_version": "1.0.0",
+    "human_review": false,
+    "human_review_reason": null,
+    "input_text": "I just got an email saying someone signed into my Meridian account from Brazil at 3am. I've never been to Brazil. Did we get hacked? Is our customer data safe? Please lock it down.",
+    "interpretation": {
+      "category": "ACCOUNT",
+      "customer_intent": "investigate a suspicious login",
+      "entities": {},
+      "missing_information": [
+        "no account identifier"
+      ],
+      "model_confidence": 0.7,
+      "reasoning_summary": "Reported unfamiliar sign-in location; user asking for the account to be secured.",
+      "risk_signals": [
+        "ACCOUNT_LOCKOUT"
+      ],
+      "summary": "Customer received an email about a sign-in from Brazil and asks whether the account was compromised and whether customer data is safe.",
+      "urgency": "NORMAL"
+    },
+    "keyword_signals": {
+      "billing_language": false,
+      "churn_language": false,
+      "data_loss_language": false,
+      "deadline_language": false,
+      "injection_language": false,
+      "legal_language": false,
+      "matched": {
+        "security_language": [
+          "hacked",
+          "someone signed in",
+          "signed into my Meridian account from",
+          "Is our customer data safe",
+          "Did we get hacked"
+        ]
+      },
+      "notes": [],
+      "outage_language": false,
+      "security_language": true
+    },
+    "missing_information": [],
+    "processing_errors": [],
+    "provider_attempts": 1,
+    "provider_model": null,
+    "provider_name": "mock",
+    "reasons": [
+      {
+        "rule_id": "R02_SECURITY",
+        "source": "DETERMINISTIC",
+        "text": "security or prompt-injection language detected; routed to SECURITY at CRITICAL regardless of the model's suggested route"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "Reported unfamiliar sign-in location; user asking for the account to be secured."
+      }
+    ],
+    "received_at": "2026-01-02T03:04:05+00:00",
+    "request_id": "example-security-suspicious-login",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": true,
+        "effect": "route=SECURITY, urgency_floor=CRITICAL, escalation=CRITICAL, disposition=ROUTED, terminal",
+        "explanation": "security or prompt-injection signal detected",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "a route was already set, or a terminal rule fired",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R02_SECURITY"
+    ],
+    "schema_version": 1,
+    "suggested_route": null,
+    "validation_error": null,
+    "validation_status": "OK"
+  },
+  "decision": {
+    "decision_confidence": 0.95,
+    "disposition": "ROUTED",
+    "escalation": "CRITICAL",
+    "human_review": false,
+    "human_review_reason": null,
+    "missing_information": [],
+    "reasons": [
+      {
+        "rule_id": "R02_SECURITY",
+        "source": "DETERMINISTIC",
+        "text": "security or prompt-injection language detected; routed to SECURITY at CRITICAL regardless of the model's suggested route"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "Reported unfamiliar sign-in location; user asking for the account to be secured."
+      }
+    ],
+    "route": "SECURITY",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": true,
+        "effect": "route=SECURITY, urgency_floor=CRITICAL, escalation=CRITICAL, disposition=ROUTED, terminal",
+        "explanation": "security or prompt-injection signal detected",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "a route was already set, or a terminal rule fired",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R02_SECURITY"
+    ],
+    "suggested_route": null,
+    "urgency": "CRITICAL"
+  },
+  "scenario_id": "security-suspicious-login"
+}

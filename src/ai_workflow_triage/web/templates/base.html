@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>{% block title %}ai-workflow-triage{% endblock %}</title>
+<link rel="stylesheet" href="/static/triage.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <h1><a href="/">ai-workflow-triage</a></h1>
+    <span class="tag">LLM interprets &middot; deterministic rules decide</span>
+    <nav>
+      <a href="/">Analyze</a>
+      <a href="/audit">Audit log</a>
+      <a href="/health">Health</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap {% block wrapclass %}{% endblock %}">
+  <p><span class="offline">Offline demo &middot; mock provider &middot; no live LLM called</span></p>
+  {% block body %}{% endblock %}
+</main>
+<footer class="site">
+  <div class="wrap">
+    ai-workflow-triage v{{ version }} &middot; provider: <span class="mono">{{ provider_name }}</span>
+    (deterministic mock) &middot; every decision here is produced by the real rule engine over a
+    canned interpretation. No API key, no network, no customer data.
+  </div>
+</footer>
+</body>
+</html>

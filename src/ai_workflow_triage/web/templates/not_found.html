@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Not found &middot; ai-workflow-triage{% endblock %}
+{% block body %}
+<h2>Audit record not found</h2>
+<p>No record with id <span class="mono">{{ audit_id }}</span>.</p>
+<p><a href="/audit">&larr; Audit log</a></p>
+{% endblock %}

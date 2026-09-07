@@ -1,0 +1,300 @@
+{
+  "audit_persisted": true,
+  "audit_record": {
+    "audit_id": "example-data-loss-accidental-delete",
+    "channel": null,
+    "decision_confidence": 0.7,
+    "escalation": "PRIORITY",
+    "final_disposition": "HUMAN_REVIEW",
+    "final_route": "HUMAN_REVIEW",
+    "final_urgency": "HIGH",
+    "harness_version": "1.0.0",
+    "human_review": true,
+    "human_review_reason": "data-loss or legal exposure mentioned \u2014 a human must review",
+    "input_text": "I think I just made a huge mistake. I selected all our projects and hit delete, and there's no undo button. That's about two years of work. Is there any way to get it back? Please tell me there's a backup.",
+    "interpretation": {
+      "category": "SUPPORT",
+      "customer_intent": "recover accidentally deleted projects",
+      "entities": {},
+      "missing_information": [
+        "no account identifier",
+        "no timestamp of the deletion"
+      ],
+      "model_confidence": 0.8,
+      "reasoning_summary": "Accidental bulk deletion with no undo; recovery request. Identity and timing not provided.",
+      "risk_signals": [
+        "MENTIONS_DATA_LOSS"
+      ],
+      "summary": "Customer selected all projects and deleted them with no undo, roughly two years of work, and asks whether a backup exists.",
+      "urgency": "HIGH"
+    },
+    "keyword_signals": {
+      "billing_language": false,
+      "churn_language": false,
+      "data_loss_language": true,
+      "deadline_language": false,
+      "injection_language": false,
+      "legal_language": false,
+      "matched": {
+        "data_loss_language": [
+          "there's no undo",
+          "no undo",
+          "tell me there's a backup",
+          "hit delete"
+        ]
+      },
+      "notes": [],
+      "outage_language": false,
+      "security_language": false
+    },
+    "missing_information": [],
+    "processing_errors": [],
+    "provider_attempts": 1,
+    "provider_model": null,
+    "provider_name": "mock",
+    "reasons": [
+      {
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL",
+        "source": "DETERMINISTIC",
+        "text": "possible data loss or legal exposure; escalated to PRIORITY and flagged for human review"
+      },
+      {
+        "rule_id": "R99_DEFAULT_SUPPORT",
+        "source": "DETERMINISTIC",
+        "text": "no specific routing rule applied; defaulting to tier-1 support"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "Accidental bulk deletion with no undo; recovery request. Identity and timing not provided."
+      }
+    ],
+    "received_at": "2026-01-02T03:04:05+00:00",
+    "request_id": "example-data-loss-accidental-delete",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": true,
+        "effect": "urgency_floor=HIGH, escalation=PRIORITY, human_review",
+        "explanation": "data-loss or legal exposure mentioned",
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R04_OUTAGE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R05_BILLING"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R06_BUG_WITH_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R07_BUG_NO_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R08_FEATURE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R09_MISSING_ACCOUNT_ID"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R10_LOW_MODEL_CONFIDENCE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R11_CONFLICTING_SIGNALS"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R12_UNKNOWN_CATEGORY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R13_ANGRY_OR_CHURN"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R14_DEADLINE"
+      },
+      {
+        "applied": true,
+        "effect": "route=SUPPORT_TIER1, disposition=ROUTED",
+        "explanation": "no routing rule applied",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R03_DATA_LOSS_OR_LEGAL",
+      "R99_DEFAULT_SUPPORT"
+    ],
+    "schema_version": 1,
+    "suggested_route": "SUPPORT_TIER1",
+    "validation_error": null,
+    "validation_status": "OK"
+  },
+  "decision": {
+    "decision_confidence": 0.7,
+    "disposition": "HUMAN_REVIEW",
+    "escalation": "PRIORITY",
+    "human_review": true,
+    "human_review_reason": "data-loss or legal exposure mentioned \u2014 a human must review",
+    "missing_information": [],
+    "reasons": [
+      {
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL",
+        "source": "DETERMINISTIC",
+        "text": "possible data loss or legal exposure; escalated to PRIORITY and flagged for human review"
+      },
+      {
+        "rule_id": "R99_DEFAULT_SUPPORT",
+        "source": "DETERMINISTIC",
+        "text": "no specific routing rule applied; defaulting to tier-1 support"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "Accidental bulk deletion with no undo; recovery request. Identity and timing not provided."
+      }
+    ],
+    "route": "HUMAN_REVIEW",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": true,
+        "effect": "urgency_floor=HIGH, escalation=PRIORITY, human_review",
+        "explanation": "data-loss or legal exposure mentioned",
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R04_OUTAGE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R05_BILLING"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R06_BUG_WITH_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R07_BUG_NO_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R08_FEATURE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R09_MISSING_ACCOUNT_ID"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R10_LOW_MODEL_CONFIDENCE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R11_CONFLICTING_SIGNALS"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R12_UNKNOWN_CATEGORY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R13_ANGRY_OR_CHURN"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R14_DEADLINE"
+      },
+      {
+        "applied": true,
+        "effect": "route=SUPPORT_TIER1, disposition=ROUTED",
+        "explanation": "no routing rule applied",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R03_DATA_LOSS_OR_LEGAL",
+      "R99_DEFAULT_SUPPORT"
+    ],
+    "suggested_route": "SUPPORT_TIER1",
+    "urgency": "HIGH"
+  },
+  "scenario_id": "data-loss-accidental-delete"
+}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Audit log &middot; ai-workflow-triage{% endblock %}
+{% block wrapclass %}wrap--wide{% endblock %}
+{% block body %}
+
+<h2>Audit log</h2>
+<p class="lede">
+  One row per processed request. Each record separately preserves what the AI
+  observed and which rule caused the decision. Newest first, last {{ page_size }}.
+</p>
+
+{% if not records %}
+<div class="card"><p>No requests processed yet. <a href="/">Run one &rarr;</a></p></div>
+{% else %}
+<div class="table-scroll">
+<table class="audit">
+  <thead>
+    <tr><th>received</th><th>route</th><th>disposition</th><th>urgency</th>
+      <th>human review</th><th>AI status</th><th>confidence</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for r in records %}
+    <tr>
+      <td class="mono">{{ r.received_at[:19].replace('T', ' ') }}</td>
+      <td><span class="pill pill--{{ r.final_route.value }}">{{ r.final_route.value }}</span></td>
+      <td class="mono">{{ r.final_disposition.value }}</td>
+      <td class="mono">{{ r.final_urgency.value }}</td>
+      <td>{{ 'yes' if r.human_review else 'no' }}</td>
+      <td class="mono">{{ r.validation_status.value }}</td>
+      <td class="mono">{{ '%.2f' | format(r.decision_confidence) }}</td>
+      <td><a href="/audit/{{ r.audit_id }}">detail &rarr;</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+
+{% endblock %}

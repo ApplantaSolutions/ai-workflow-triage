@@ -1,0 +1,295 @@
+{
+  "audit_persisted": true,
+  "audit_record": {
+    "audit_id": "example-missing-account-id-close",
+    "channel": null,
+    "decision_confidence": 0.75,
+    "escalation": "NONE",
+    "final_disposition": "NEEDS_INFORMATION",
+    "final_route": "NEEDS_INFORMATION",
+    "final_urgency": "NORMAL",
+    "harness_version": "1.0.0",
+    "human_review": false,
+    "human_review_reason": null,
+    "input_text": "Please close my account and delete my data. I don't want to be billed again next month.",
+    "interpretation": {
+      "category": "ACCOUNT",
+      "customer_intent": "close the account and delete data",
+      "entities": {},
+      "missing_information": [
+        "no account identifier",
+        "no verification of identity"
+      ],
+      "model_confidence": 0.75,
+      "reasoning_summary": "Routine account-closure and data-deletion request; no identifying details supplied.",
+      "risk_signals": [],
+      "summary": "Customer asks to close their account and delete their data so they are not billed next month.",
+      "urgency": "NORMAL"
+    },
+    "keyword_signals": {
+      "billing_language": false,
+      "churn_language": false,
+      "data_loss_language": false,
+      "deadline_language": false,
+      "injection_language": false,
+      "legal_language": false,
+      "matched": {},
+      "notes": [],
+      "outage_language": false,
+      "security_language": false
+    },
+    "missing_information": [
+      "an account email, account ID, or invoice number"
+    ],
+    "processing_errors": [],
+    "provider_attempts": 1,
+    "provider_model": null,
+    "provider_name": "mock",
+    "reasons": [
+      {
+        "rule_id": "R09_MISSING_ACCOUNT_ID",
+        "source": "DETERMINISTIC",
+        "text": "no account identifier (email, account ID, or invoice number) provided; need one before this can be actioned"
+      },
+      {
+        "rule_id": "R99_DEFAULT_SUPPORT",
+        "source": "DETERMINISTIC",
+        "text": "no specific routing rule applied; defaulting to tier-1 support"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "Routine account-closure and data-deletion request; no identifying details supplied."
+      }
+    ],
+    "received_at": "2026-01-02T03:04:05+00:00",
+    "request_id": "example-missing-account-id-close",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R04_OUTAGE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R05_BILLING"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R06_BUG_WITH_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R07_BUG_NO_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R08_FEATURE"
+      },
+      {
+        "applied": true,
+        "effect": "disposition=NEEDS_INFORMATION",
+        "explanation": "billing/account/implementation request with no account identifier",
+        "rule_id": "R09_MISSING_ACCOUNT_ID"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R10_LOW_MODEL_CONFIDENCE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R11_CONFLICTING_SIGNALS"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R12_UNKNOWN_CATEGORY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R13_ANGRY_OR_CHURN"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R14_DEADLINE"
+      },
+      {
+        "applied": true,
+        "effect": "route=SUPPORT_TIER1, disposition=ROUTED",
+        "explanation": "no routing rule applied",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R09_MISSING_ACCOUNT_ID",
+      "R99_DEFAULT_SUPPORT"
+    ],
+    "schema_version": 1,
+    "suggested_route": "SUPPORT_TIER1",
+    "validation_error": null,
+    "validation_status": "OK"
+  },
+  "decision": {
+    "decision_confidence": 0.75,
+    "disposition": "NEEDS_INFORMATION",
+    "escalation": "NONE",
+    "human_review": false,
+    "human_review_reason": null,
+    "missing_information": [
+      "an account email, account ID, or invoice number"
+    ],
+    "reasons": [
+      {
+        "rule_id": "R09_MISSING_ACCOUNT_ID",
+        "source": "DETERMINISTIC",
+        "text": "no account identifier (email, account ID, or invoice number) provided; need one before this can be actioned"
+      },
+      {
+        "rule_id": "R99_DEFAULT_SUPPORT",
+        "source": "DETERMINISTIC",
+        "text": "no specific routing rule applied; defaulting to tier-1 support"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "Routine account-closure and data-deletion request; no identifying details supplied."
+      }
+    ],
+    "route": "NEEDS_INFORMATION",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R04_OUTAGE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R05_BILLING"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R06_BUG_WITH_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R07_BUG_NO_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R08_FEATURE"
+      },
+      {
+        "applied": true,
+        "effect": "disposition=NEEDS_INFORMATION",
+        "explanation": "billing/account/implementation request with no account identifier",
+        "rule_id": "R09_MISSING_ACCOUNT_ID"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R10_LOW_MODEL_CONFIDENCE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R11_CONFLICTING_SIGNALS"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R12_UNKNOWN_CATEGORY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R13_ANGRY_OR_CHURN"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R14_DEADLINE"
+      },
+      {
+        "applied": true,
+        "effect": "route=SUPPORT_TIER1, disposition=ROUTED",
+        "explanation": "no routing rule applied",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R09_MISSING_ACCOUNT_ID",
+      "R99_DEFAULT_SUPPORT"
+    ],
+    "suggested_route": "SUPPORT_TIER1",
+    "urgency": "NORMAL"
+  },
+  "scenario_id": "missing-account-id-close"
+}

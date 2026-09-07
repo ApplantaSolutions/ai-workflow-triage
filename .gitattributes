@@ -1,0 +1,9 @@
+# Deterministic line endings across platforms. Text files are stored and checked
+# out as LF; Python code that writes fixtures/examples also passes newline="\n".
+* text=auto eol=lf
+
+# Binary — never touched by line-ending or diff machinery.
+*.png binary
+*.sqlite binary
+*.sqlite3 binary
+*.db binary

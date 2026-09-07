@@ -1,0 +1,317 @@
+{
+  "audit_persisted": true,
+  "audit_record": {
+    "audit_id": "example-outage-cannot-login",
+    "channel": null,
+    "decision_confidence": 0.9,
+    "escalation": "NONE",
+    "final_disposition": "ROUTED",
+    "final_route": "RELIABILITY",
+    "final_urgency": "HIGH",
+    "harness_version": "1.0.0",
+    "human_review": false,
+    "human_review_reason": null,
+    "input_text": "URGENT \u2014 the whole dashboard is down. None of my team (8 people) can log in, we just get a spinning wheel then a 503. We have a client demo in 45 minutes. Please help.",
+    "interpretation": {
+      "category": "OUTAGE",
+      "customer_intent": "restore access to the dashboard before a client demo",
+      "entities": {
+        "affected_system": "dashboard"
+      },
+      "missing_information": [],
+      "model_confidence": 0.9,
+      "reasoning_summary": "Full loss of access for a team with a 503; time pressure and frustration noted.",
+      "risk_signals": [
+        "SERVICE_DOWN",
+        "DEADLINE_MENTIONED",
+        "ANGRY_TONE"
+      ],
+      "summary": "The whole dashboard is down; an 8-person team gets a 503 after a spinning wheel and cannot log in, with a client demo in 45 minutes.",
+      "urgency": "CRITICAL"
+    },
+    "keyword_signals": {
+      "billing_language": false,
+      "churn_language": false,
+      "data_loss_language": false,
+      "deadline_language": true,
+      "injection_language": false,
+      "legal_language": false,
+      "matched": {
+        "deadline_language": [
+          "in 45 min",
+          "demo in 45"
+        ],
+        "outage_language": [
+          "is down",
+          "503",
+          "whole dashboard is down",
+          "spinning wheel"
+        ]
+      },
+      "notes": [],
+      "outage_language": true,
+      "security_language": false
+    },
+    "missing_information": [],
+    "processing_errors": [],
+    "provider_attempts": 1,
+    "provider_model": null,
+    "provider_name": "mock",
+    "reasons": [
+      {
+        "rule_id": "R04_OUTAGE",
+        "source": "DETERMINISTIC",
+        "text": "outage indicators (category, service-down signal, or outage language + an affected system); routed to RELIABILITY"
+      },
+      {
+        "rule_id": "R13_ANGRY_OR_CHURN",
+        "source": "DETERMINISTIC",
+        "text": "angry tone or a churn / cancellation signal; urgency raised to at least HIGH (no automatic escalation)"
+      },
+      {
+        "rule_id": "R14_DEADLINE",
+        "source": "DETERMINISTIC",
+        "text": "a deadline was mentioned; urgency raised to at least HIGH"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "Full loss of access for a team with a 503; time pressure and frustration noted."
+      }
+    ],
+    "received_at": "2026-01-02T03:04:05+00:00",
+    "request_id": "example-outage-cannot-login",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL"
+      },
+      {
+        "applied": true,
+        "effect": "route=RELIABILITY, urgency_floor=HIGH, disposition=ROUTED",
+        "explanation": "outage indicators present",
+        "rule_id": "R04_OUTAGE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R05_BILLING"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R06_BUG_WITH_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R07_BUG_NO_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R08_FEATURE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R09_MISSING_ACCOUNT_ID"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R10_LOW_MODEL_CONFIDENCE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R11_CONFLICTING_SIGNALS"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R12_UNKNOWN_CATEGORY"
+      },
+      {
+        "applied": true,
+        "effect": "urgency_floor=HIGH",
+        "explanation": "angry tone or a churn / cancellation signal",
+        "rule_id": "R13_ANGRY_OR_CHURN"
+      },
+      {
+        "applied": true,
+        "effect": "urgency_floor=HIGH",
+        "explanation": "a deadline was mentioned",
+        "rule_id": "R14_DEADLINE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "a route was already set, or a terminal rule fired",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R04_OUTAGE",
+      "R13_ANGRY_OR_CHURN",
+      "R14_DEADLINE"
+    ],
+    "schema_version": 1,
+    "suggested_route": null,
+    "validation_error": null,
+    "validation_status": "OK"
+  },
+  "decision": {
+    "decision_confidence": 0.9,
+    "disposition": "ROUTED",
+    "escalation": "NONE",
+    "human_review": false,
+    "human_review_reason": null,
+    "missing_information": [],
+    "reasons": [
+      {
+        "rule_id": "R04_OUTAGE",
+        "source": "DETERMINISTIC",
+        "text": "outage indicators (category, service-down signal, or outage language + an affected system); routed to RELIABILITY"
+      },
+      {
+        "rule_id": "R13_ANGRY_OR_CHURN",
+        "source": "DETERMINISTIC",
+        "text": "angry tone or a churn / cancellation signal; urgency raised to at least HIGH (no automatic escalation)"
+      },
+      {
+        "rule_id": "R14_DEADLINE",
+        "source": "DETERMINISTIC",
+        "text": "a deadline was mentioned; urgency raised to at least HIGH"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "Full loss of access for a team with a 503; time pressure and frustration noted."
+      }
+    ],
+    "route": "RELIABILITY",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL"
+      },
+      {
+        "applied": true,
+        "effect": "route=RELIABILITY, urgency_floor=HIGH, disposition=ROUTED",
+        "explanation": "outage indicators present",
+        "rule_id": "R04_OUTAGE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R05_BILLING"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R06_BUG_WITH_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R07_BUG_NO_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R08_FEATURE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R09_MISSING_ACCOUNT_ID"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R10_LOW_MODEL_CONFIDENCE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R11_CONFLICTING_SIGNALS"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R12_UNKNOWN_CATEGORY"
+      },
+      {
+        "applied": true,
+        "effect": "urgency_floor=HIGH",
+        "explanation": "angry tone or a churn / cancellation signal",
+        "rule_id": "R13_ANGRY_OR_CHURN"
+      },
+      {
+        "applied": true,
+        "effect": "urgency_floor=HIGH",
+        "explanation": "a deadline was mentioned",
+        "rule_id": "R14_DEADLINE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "a route was already set, or a terminal rule fired",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R04_OUTAGE",
+      "R13_ANGRY_OR_CHURN",
+      "R14_DEADLINE"
+    ],
+    "suggested_route": null,
+    "urgency": "HIGH"
+  },
+  "scenario_id": "outage-cannot-login"
+}

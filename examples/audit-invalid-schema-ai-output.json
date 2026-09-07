@@ -1,0 +1,119 @@
+{
+  "audit_persisted": true,
+  "audit_record": {
+    "audit_id": "example-invalid-schema-ai-output",
+    "channel": null,
+    "decision_confidence": 0.98,
+    "escalation": "NONE",
+    "final_disposition": "HUMAN_REVIEW",
+    "final_route": "HUMAN_REVIEW",
+    "final_urgency": "NORMAL",
+    "harness_version": "1.0.0",
+    "human_review": true,
+    "human_review_reason": "AI interpretation unusable (INVALID_SCHEMA)",
+    "input_text": "The API is returning 500s on every POST to /v2/orders since about an hour ago. Our integration is down.",
+    "interpretation": null,
+    "keyword_signals": {
+      "billing_language": false,
+      "churn_language": false,
+      "data_loss_language": false,
+      "deadline_language": false,
+      "injection_language": false,
+      "legal_language": false,
+      "matched": {
+        "outage_language": [
+          "is down",
+          "500s",
+          "returning 500",
+          "integration is down"
+        ]
+      },
+      "notes": [],
+      "outage_language": true,
+      "security_language": false
+    },
+    "missing_information": [],
+    "processing_errors": [
+      "AI interpretation unusable (INVALID_SCHEMA)"
+    ],
+    "provider_attempts": 2,
+    "provider_model": null,
+    "provider_name": "mock",
+    "reasons": [
+      {
+        "rule_id": "R01_AI_UNUSABLE",
+        "source": "DETERMINISTIC",
+        "text": "the AI response was invalid schema; routed to a human instead of guessing a route"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "AI interpretation was unusable and was not relied on for the routing decision."
+      }
+    ],
+    "received_at": "2026-01-02T03:04:05+00:00",
+    "request_id": "example-invalid-schema-ai-output",
+    "rule_trace": [
+      {
+        "applied": true,
+        "effect": "human_review, disposition=HUMAN_REVIEW, terminal",
+        "explanation": "AI output was not usable (INVALID_SCHEMA)",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "a route was already set, or a terminal rule fired",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R01_AI_UNUSABLE"
+    ],
+    "schema_version": 1,
+    "suggested_route": null,
+    "validation_error": "urgency: Input should be 'LOW', 'NORMAL', 'HIGH' or 'CRITICAL'; model_confidence: Value error, model_confidence must be between 0.0 and 1.0",
+    "validation_status": "INVALID_SCHEMA"
+  },
+  "decision": {
+    "decision_confidence": 0.98,
+    "disposition": "HUMAN_REVIEW",
+    "escalation": "NONE",
+    "human_review": true,
+    "human_review_reason": "AI interpretation unusable (INVALID_SCHEMA)",
+    "missing_information": [],
+    "reasons": [
+      {
+        "rule_id": "R01_AI_UNUSABLE",
+        "source": "DETERMINISTIC",
+        "text": "the AI response was invalid schema; routed to a human instead of guessing a route"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "AI interpretation was unusable and was not relied on for the routing decision."
+      }
+    ],
+    "route": "HUMAN_REVIEW",
+    "rule_trace": [
+      {
+        "applied": true,
+        "effect": "human_review, disposition=HUMAN_REVIEW, terminal",
+        "explanation": "AI output was not usable (INVALID_SCHEMA)",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "a route was already set, or a terminal rule fired",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R01_AI_UNUSABLE"
+    ],
+    "suggested_route": null,
+    "urgency": "NORMAL"
+  },
+  "scenario_id": "invalid-schema-ai-output"
+}

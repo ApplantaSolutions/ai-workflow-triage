@@ -1,0 +1,280 @@
+{
+  "audit_persisted": true,
+  "audit_record": {
+    "audit_id": "example-bug-with-repro",
+    "channel": null,
+    "decision_confidence": 0.8,
+    "escalation": "NONE",
+    "final_disposition": "ROUTED",
+    "final_route": "ENGINEERING",
+    "final_urgency": "NORMAL",
+    "harness_version": "1.0.0",
+    "human_review": false,
+    "human_review_reason": null,
+    "input_text": "Bug: on the Settings \u2192 Notifications page, clicking Save throws error E-1042 every single time. Steps: 1) open Settings, 2) go to Notifications, 3) toggle 'email digest' off, 4) click Save. Happens in production for all three of us. Browser: Chrome, latest.",
+    "interpretation": {
+      "category": "BUG",
+      "customer_intent": "report a reproducible Save failure",
+      "entities": {
+        "affected_system": "Settings/Notifications",
+        "environment": "production",
+        "error_code": "E-1042"
+      },
+      "missing_information": [],
+      "model_confidence": 0.9,
+      "reasoning_summary": "Clear bug report with explicit reproduction steps, an error code, and environment.",
+      "risk_signals": [],
+      "summary": "Clicking Save on Settings > Notifications throws error E-1042 every time, reproducible for three users in production.",
+      "urgency": "NORMAL"
+    },
+    "keyword_signals": {
+      "billing_language": false,
+      "churn_language": false,
+      "data_loss_language": false,
+      "deadline_language": false,
+      "injection_language": false,
+      "legal_language": false,
+      "matched": {},
+      "notes": [],
+      "outage_language": false,
+      "security_language": false
+    },
+    "missing_information": [],
+    "processing_errors": [],
+    "provider_attempts": 1,
+    "provider_model": null,
+    "provider_name": "mock",
+    "reasons": [
+      {
+        "rule_id": "R06_BUG_WITH_REPRO",
+        "source": "DETERMINISTIC",
+        "text": "bug report includes an error code or reproduction steps; routed to ENGINEERING"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "Clear bug report with explicit reproduction steps, an error code, and environment."
+      }
+    ],
+    "received_at": "2026-01-02T03:04:05+00:00",
+    "request_id": "example-bug-with-repro",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R04_OUTAGE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R05_BILLING"
+      },
+      {
+        "applied": true,
+        "effect": "route=ENGINEERING, disposition=ROUTED",
+        "explanation": "bug report with an error code or reproduction detail",
+        "rule_id": "R06_BUG_WITH_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R07_BUG_NO_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R08_FEATURE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R09_MISSING_ACCOUNT_ID"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R10_LOW_MODEL_CONFIDENCE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R11_CONFLICTING_SIGNALS"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R12_UNKNOWN_CATEGORY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R13_ANGRY_OR_CHURN"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R14_DEADLINE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "a route was already set, or a terminal rule fired",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R06_BUG_WITH_REPRO"
+    ],
+    "schema_version": 1,
+    "suggested_route": null,
+    "validation_error": null,
+    "validation_status": "OK"
+  },
+  "decision": {
+    "decision_confidence": 0.8,
+    "disposition": "ROUTED",
+    "escalation": "NONE",
+    "human_review": false,
+    "human_review_reason": null,
+    "missing_information": [],
+    "reasons": [
+      {
+        "rule_id": "R06_BUG_WITH_REPRO",
+        "source": "DETERMINISTIC",
+        "text": "bug report includes an error code or reproduction steps; routed to ENGINEERING"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "Clear bug report with explicit reproduction steps, an error code, and environment."
+      }
+    ],
+    "route": "ENGINEERING",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R04_OUTAGE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R05_BILLING"
+      },
+      {
+        "applied": true,
+        "effect": "route=ENGINEERING, disposition=ROUTED",
+        "explanation": "bug report with an error code or reproduction detail",
+        "rule_id": "R06_BUG_WITH_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R07_BUG_NO_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R08_FEATURE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R09_MISSING_ACCOUNT_ID"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R10_LOW_MODEL_CONFIDENCE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R11_CONFLICTING_SIGNALS"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R12_UNKNOWN_CATEGORY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R13_ANGRY_OR_CHURN"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R14_DEADLINE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "a route was already set, or a terminal rule fired",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R06_BUG_WITH_REPRO"
+    ],
+    "suggested_route": null,
+    "urgency": "NORMAL"
+  },
+  "scenario_id": "bug-with-repro"
+}

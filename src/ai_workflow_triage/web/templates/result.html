@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}Triage result &middot; ai-workflow-triage{% endblock %}
+{% block body %}
+
+<p><a href="/">&larr; New analysis</a></p>
+
+<h2>Triage result</h2>
+
+<h3>Inbound request</h3>
+<div class="request-text">{{ record.input_text }}</div>
+
+<div class="split">
+  <section class="panel panel--ai">
+    <h3>&#128269; What the AI observed</h3>
+    <p class="note">Untrusted until validated. Never decides the outcome.</p>
+    {% if interpretation %}
+    <dl class="kv">
+      <dt>validation</dt><dd><span class="mono">{{ record.validation_status.value }}</span>
+        &middot; attempt {{ record.provider_attempts }}</dd>
+      <dt>category</dt><dd class="mono">{{ interpretation.category.value }}</dd>
+      <dt>urgency</dt><dd class="mono">{{ interpretation.urgency.value }}
+        <span class="note">&mdash; the model's read; not used for the final number</span></dd>
+      <dt>intent</dt><dd>{{ interpretation.customer_intent }}</dd>
+      <dt>risk signals</dt><dd class="mono">{{ interpretation.risk_signals | map(attribute='value') | join(', ') or '(none)' }}</dd>
+      <dt>missing info</dt><dd>{{ interpretation.missing_information | join('; ') or '(none)' }}</dd>
+      <dt>confidence</dt><dd class="mono">{{ '%.2f' | format(interpretation.model_confidence) }}
+        <span class="note">self-reported</span></dd>
+      <dt>rationale</dt><dd>{{ interpretation.reasoning_summary }}</dd>
+    </dl>
+    {% else %}
+    <p><strong>No usable interpretation.</strong></p>
+    <p class="mono">{{ record.validation_status.value }}{% if record.validation_error %} &mdash; {{ record.validation_error }}{% endif %}</p>
+    <p class="note">A provider error, unparseable text, or a schema failure. The
+      rule engine treats this as the unusable-AI state.</p>
+    {% endif %}
+  </section>
+
+  <section class="panel panel--decision">
+    <h3>&#9878; Deterministic decision</h3>
+    <p class="note">Produced by the non-AI rule engine. This is the authoritative outcome.</p>
+    <dl class="kv">
+      <dt>route</dt><dd><span class="pill pill--{{ decision.route.value }}">{{ decision.route.value }}</span></dd>
+      {% if decision.suggested_route %}
+      <dt>would-be route</dt><dd class="mono">{{ decision.suggested_route.value }}</dd>
+      {% endif %}
+      <dt>urgency</dt><dd><span class="pill pill--{{ decision.urgency.value }}">{{ decision.urgency.value }}</span>
+        <span class="note">rule-derived</span></dd>
+      <dt>disposition</dt><dd><span class="pill pill--{{ decision.disposition.value }}">{{ decision.disposition.value }}</span></dd>
+      <dt>escalation</dt><dd><span class="pill pill--{{ decision.escalation.value }}">{{ decision.escalation.value }}</span></dd>
+      <dt>human review</dt><dd>{{ 'yes' if decision.human_review else 'no' }}{% if decision.human_review_reason %}
+        <span class="note">&mdash; {{ decision.human_review_reason }}</span>{% endif %}</dd>
+      {% if decision.missing_information %}
+      <dt>info needed</dt><dd>{{ decision.missing_information | join('; ') }}</dd>
+      {% endif %}
+      <dt>confidence</dt><dd class="mono">{{ '%.2f' | format(decision.decision_confidence) }}
+        <span class="note">heuristic, not a probability</span></dd>
+      <dt>rules fired</dt><dd class="mono">{{ decision.rules_triggered | join(', ') }}</dd>
+    </dl>
+  </section>
+</div>
+
+{% if diverged and interpretation %}
+<div class="card" style="border-color: var(--authority)">
+  <h3>The deterministic layer did not simply follow the model</h3>
+  <p>
+    The model read this as
+    <span class="pill pill--{{ interpretation.category.value if interpretation.category.value in ['SECURITY'] else 'NORMAL' }}">{{ interpretation.category.value }}</span>
+    /
+    <span class="pill pill--{{ interpretation.urgency.value }}">{{ interpretation.urgency.value }}</span>.
+    The rule engine authorized
+    <span class="pill pill--{{ decision.route.value }}">{{ decision.route.value }}</span>
+    /
+    <span class="pill pill--{{ decision.urgency.value }}">{{ decision.urgency.value }}</span>
+    &mdash; from deterministic signals re-derived straight from the raw text,
+    independent of the model.
+  </p>
+</div>
+{% endif %}
+
+<h2>Why this decision</h2>
+<ul class="reasons">
+  {% for r in deterministic_reasons %}
+  <li><span class="chip chip--DETERMINISTIC">DETERMINISTIC</span>
+    <span class="mono">{{ r.rule_id }}</span> &middot; {{ r.text }}</li>
+  {% endfor %}
+  {% if ai_reason %}
+  <li><span class="chip chip--AI_OBSERVATION">AI OBSERVATION</span> {{ ai_reason.text }}</li>
+  {% endif %}
+</ul>
+
+<details>
+  <summary>Full rule trace ({{ record.rule_trace | length }} rules evaluated in order)</summary>
+  <div class="table-scroll">
+  <table class="audit trace">
+    <thead><tr><th>rule</th><th>applied</th><th>effect</th><th>explanation</th></tr></thead>
+    <tbody>
+      {% for t in record.rule_trace %}
+      <tr>
+        <td class="mono">{{ t.rule_id }}</td>
+        <td>{{ 'yes' if t.applied else 'no' }}</td>
+        <td class="mono">{{ t.effect or '' }}</td>
+        <td>{{ t.explanation }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</details>
+
+<p style="margin-top:20px">
+  <a href="/audit/{{ record.audit_id }}">View the full audit record &rarr;</a>
+  {% if not result.audit_persisted %}
+  <span class="note">(not persisted{% if result.persistence_error %}: {{ result.persistence_error }}{% endif %})</span>
+  {% endif %}
+</p>
+
+{% endblock %}

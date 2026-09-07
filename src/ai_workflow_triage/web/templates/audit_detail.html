@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Audit record &middot; ai-workflow-triage{% endblock %}
+{% block body %}
+
+<p><a href="/audit">&larr; Audit log</a></p>
+<h2>Audit record</h2>
+<p class="mono note">{{ record.audit_id }}</p>
+
+<div class="card">
+  <h3>Provenance</h3>
+  <dl class="kv">
+    <dt>received</dt><dd class="mono">{{ record.received_at }}</dd>
+    <dt>schema / version</dt><dd class="mono">v{{ record.schema_version }} / {{ record.harness_version }}</dd>
+    <dt>provider</dt><dd class="mono">{{ record.provider_name }}{% if record.provider_model %} ({{ record.provider_model }}){% endif %}
+      &middot; {{ record.provider_attempts }} attempt(s)</dd>
+    <dt>validation</dt><dd class="mono">{{ record.validation_status.value }}{% if record.validation_error %}
+      &mdash; {{ record.validation_error }}{% endif %}</dd>
+    {% if record.processing_errors %}
+    <dt>processing notes</dt><dd>{{ record.processing_errors | join('; ') }}</dd>
+    {% endif %}
+  </dl>
+</div>
+
+<h3>Request</h3>
+<div class="request-text">{{ record.input_text }}</div>
+
+<div class="split">
+  <section class="panel panel--ai">
+    <h3>&#128269; AI interpretation</h3>
+    {% if record.interpretation %}
+    <pre class="json">{{ record.interpretation.model_dump_json(indent=2) }}</pre>
+    {% else %}
+    <p class="note">null &mdash; the AI output was unusable ({{ record.validation_status.value }}).</p>
+    {% endif %}
+  </section>
+  <section class="panel panel--ai">
+    <h3>Deterministic keyword signals</h3>
+    <pre class="json">{{ record.keyword_signals.model_dump_json(indent=2) }}</pre>
+  </section>
+</div>
+
+<h2>Decision</h2>
+<dl class="kv">
+  <dt>route</dt><dd><span class="pill pill--{{ record.final_route.value }}">{{ record.final_route.value }}</span></dd>
+  {% if record.suggested_route %}<dt>would-be route</dt><dd class="mono">{{ record.suggested_route.value }}</dd>{% endif %}
+  <dt>urgency</dt><dd class="mono">{{ record.final_urgency.value }}</dd>
+  <dt>disposition</dt><dd class="mono">{{ record.final_disposition.value }}</dd>
+  <dt>escalation</dt><dd class="mono">{{ record.escalation.value }}</dd>
+  <dt>human review</dt><dd>{{ 'yes' if record.human_review else 'no' }}{% if record.human_review_reason %}
+    &mdash; {{ record.human_review_reason }}{% endif %}</dd>
+  {% if record.missing_information %}<dt>info needed</dt><dd>{{ record.missing_information | join('; ') }}</dd>{% endif %}
+  <dt>confidence</dt><dd class="mono">{{ '%.2f' | format(record.decision_confidence) }} <span class="note">heuristic</span></dd>
+  <dt>rules fired</dt><dd class="mono">{{ record.rules_triggered | join(', ') }}</dd>
+</dl>
+
+<h3>Reasons</h3>
+<ul class="reasons">
+  {% for r in record.reasons %}
+  <li><span class="chip chip--{{ r.source }}">{{ r.source.replace('_', ' ') }}</span>
+    {% if r.rule_id %}<span class="mono">{{ r.rule_id }}</span> &middot; {% endif %}{{ r.text }}</li>
+  {% endfor %}
+</ul>
+
+<details>
+  <summary>Full rule trace</summary>
+  <div class="table-scroll">
+  <table class="audit trace">
+    <thead><tr><th>rule</th><th>applied</th><th>effect</th><th>explanation</th></tr></thead>
+    <tbody>
+      {% for t in record.rule_trace %}
+      <tr><td class="mono">{{ t.rule_id }}</td><td>{{ 'yes' if t.applied else 'no' }}</td>
+        <td class="mono">{{ t.effect or '' }}</td><td>{{ t.explanation }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</details>
+
+{% endblock %}

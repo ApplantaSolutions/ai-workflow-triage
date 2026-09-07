@@ -1,0 +1,289 @@
+{
+  "audit_persisted": true,
+  "audit_record": {
+    "audit_id": "example-billing-double-charge",
+    "channel": null,
+    "decision_confidence": 0.9,
+    "escalation": "NONE",
+    "final_disposition": "ROUTED",
+    "final_route": "BILLING",
+    "final_urgency": "NORMAL",
+    "harness_version": "1.0.0",
+    "human_review": false,
+    "human_review_reason": null,
+    "input_text": "I was charged twice for our March subscription \u2014 I see two identical charges of $149 on invoice M-4821 and M-4822, same date. Please refund the duplicate. Account is priya@meridiantools-example.com.",
+    "interpretation": {
+      "category": "BILLING",
+      "customer_intent": "refund a duplicate March charge",
+      "entities": {
+        "account_email": "priya@meridiantools-example.com",
+        "amount": "$149",
+        "invoice_number": "M-4821"
+      },
+      "missing_information": [],
+      "model_confidence": 0.93,
+      "reasoning_summary": "Two identical charges described with invoice numbers; a billing duplicate-charge case.",
+      "risk_signals": [
+        "DUPLICATE_CHARGE"
+      ],
+      "summary": "Customer was charged twice for the March subscription and wants the duplicate refunded.",
+      "urgency": "NORMAL"
+    },
+    "keyword_signals": {
+      "billing_language": true,
+      "churn_language": false,
+      "data_loss_language": false,
+      "deadline_language": false,
+      "injection_language": false,
+      "legal_language": false,
+      "matched": {
+        "billing_language": [
+          "charged twice",
+          "refund",
+          "invoice",
+          "two identical charges"
+        ]
+      },
+      "notes": [],
+      "outage_language": false,
+      "security_language": false
+    },
+    "missing_information": [],
+    "processing_errors": [],
+    "provider_attempts": 1,
+    "provider_model": null,
+    "provider_name": "mock",
+    "reasons": [
+      {
+        "rule_id": "R05_BILLING",
+        "source": "DETERMINISTIC",
+        "text": "billing indicators (category, duplicate-charge signal, or billing language); routed to BILLING"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "Two identical charges described with invoice numbers; a billing duplicate-charge case."
+      }
+    ],
+    "received_at": "2026-01-02T03:04:05+00:00",
+    "request_id": "example-billing-double-charge",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R04_OUTAGE"
+      },
+      {
+        "applied": true,
+        "effect": "route=BILLING, disposition=ROUTED",
+        "explanation": "billing indicators present",
+        "rule_id": "R05_BILLING"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R06_BUG_WITH_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R07_BUG_NO_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R08_FEATURE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R09_MISSING_ACCOUNT_ID"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R10_LOW_MODEL_CONFIDENCE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R11_CONFLICTING_SIGNALS"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R12_UNKNOWN_CATEGORY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R13_ANGRY_OR_CHURN"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R14_DEADLINE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "a route was already set, or a terminal rule fired",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R05_BILLING"
+    ],
+    "schema_version": 1,
+    "suggested_route": null,
+    "validation_error": null,
+    "validation_status": "OK"
+  },
+  "decision": {
+    "decision_confidence": 0.9,
+    "disposition": "ROUTED",
+    "escalation": "NONE",
+    "human_review": false,
+    "human_review_reason": null,
+    "missing_information": [],
+    "reasons": [
+      {
+        "rule_id": "R05_BILLING",
+        "source": "DETERMINISTIC",
+        "text": "billing indicators (category, duplicate-charge signal, or billing language); routed to BILLING"
+      },
+      {
+        "rule_id": null,
+        "source": "AI_OBSERVATION",
+        "text": "Two identical charges described with invoice numbers; a billing duplicate-charge case."
+      }
+    ],
+    "route": "BILLING",
+    "rule_trace": [
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R01_AI_UNUSABLE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R02_SECURITY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R03_DATA_LOSS_OR_LEGAL"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R04_OUTAGE"
+      },
+      {
+        "applied": true,
+        "effect": "route=BILLING, disposition=ROUTED",
+        "explanation": "billing indicators present",
+        "rule_id": "R05_BILLING"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R06_BUG_WITH_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R07_BUG_NO_REPRO"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R08_FEATURE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R09_MISSING_ACCOUNT_ID"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R10_LOW_MODEL_CONFIDENCE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R11_CONFLICTING_SIGNALS"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R12_UNKNOWN_CATEGORY"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R13_ANGRY_OR_CHURN"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "did not apply",
+        "rule_id": "R14_DEADLINE"
+      },
+      {
+        "applied": false,
+        "effect": null,
+        "explanation": "a route was already set, or a terminal rule fired",
+        "rule_id": "R99_DEFAULT_SUPPORT"
+      }
+    ],
+    "rules_triggered": [
+      "R05_BILLING"
+    ],
+    "suggested_route": null,
+    "urgency": "NORMAL"
+  },
+  "scenario_id": "billing-double-charge"
+}

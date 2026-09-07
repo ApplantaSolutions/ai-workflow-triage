@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block body %}
+
+<h2>Triage an inbound request</h2>
+<p class="lede">
+  Paste a support / operations message, or pick a synthetic sample. An LLM
+  interprets it into structured fields; a deterministic rule engine then decides
+  the route, urgency, escalation, and whether a human must look first &mdash; and
+  every decision is traceable to the rule that caused it.
+</p>
+
+{% if error %}<div class="err">{{ error }}</div>{% endif %}
+
+<form class="analyze card" method="post" action="/analyze">
+  <label for="text"><h3>Free-text message</h3></label>
+  <textarea id="text" name="text" placeholder="e.g. The whole dashboard is down and none of my team can log in&hellip;">{{ text or "" }}</textarea>
+
+  <div class="row">
+    <label for="scenario_id"><h3 style="margin:0">&hellip; or a synthetic sample</h3></label>
+    <select id="scenario_id" name="scenario_id">
+      <option value="">&mdash; use the free text above &mdash;</option>
+      {% for s in scenarios %}
+      <option value="{{ s.id }}">{{ s.title }}</option>
+      {% endfor %}
+    </select>
+    <button class="primary" type="submit">Analyze &rarr;</button>
+  </div>
+
+  <div class="quick">
+    <span class="note" style="align-self:center">Try:</span>
+    <button type="submit" name="scenario_id" value="security-prompt-injection" class="flagship">
+      &#9873; Prompt injection (flagship)
+    </button>
+    <button type="submit" name="scenario_id" value="billing-double-charge">Normal billing case</button>
+    <button type="submit" name="scenario_id" value="ambiguous-vague">Vague / low confidence</button>
+    <button type="submit" name="scenario_id" value="malformed-ai-output">Malformed AI output</button>
+    <button type="submit" name="scenario_id" value="data-loss-accidental-delete">Data-loss escalation</button>
+  </div>
+</form>
+
+<div class="card">
+  <h3>What this demonstrates</h3>
+  <div class="flow">
+    <span class="step">Inbound message</span><span class="arrow">&rarr;</span>
+    <span class="step ai">LLM interpretation<br><span class="note">observations only</span></span>
+    <span class="arrow">&rarr;</span>
+    <span class="step">Keyword signals<br><span class="note">re-derived from raw text</span></span>
+    <span class="arrow">&rarr;</span>
+    <span class="step gate">Deterministic rule engine<br><span class="note">non-AI &middot; authorizes the outcome</span></span>
+    <span class="arrow">&rarr;</span>
+    <span class="step">Route &middot; urgency &middot; escalation</span>
+  </div>
+  <p class="note">
+    The model reads and structures the message. It holds no authorization
+    authority: it can never pick the final route, force an escalation, or set the
+    human-review verdict. If it fails or is uncertain, the request goes to a
+    human &mdash; never a confident guess.
+  </p>
+</div>
+
+{% endblock %}
